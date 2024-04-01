@@ -6,6 +6,7 @@ const app = express();
 
 amqpCore(async () => {
     await ControllerAuth.authSignin();
+    await ControllerAuth.authSignout();
     
 })
 
