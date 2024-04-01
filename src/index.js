@@ -11,6 +11,8 @@ amqpCore(async () => {
     await ControllerAuth.authSignout();
     
     // ROLE
+    await ControllerRole.getAllRole();
+    await ControllerRole.getRoleById();
     await ControllerRole.createRole();
     await ControllerRole.updateRole();
     await ControllerRole.deleteRole();

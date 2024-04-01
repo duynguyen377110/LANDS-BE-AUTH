@@ -14,6 +14,14 @@ const configQueue = {
             CONSUMMER_ROLE: 'AUTH-ROLE',
             REFLY_ROLE: 'REFLY-AUTH-ROLE'
         },
+        ALL_ROLE: {
+            CONSUMMER_ALL_ROLE: 'AUTH-ALL-ROLE',
+            REFLY_ALL_ROLE: 'REFLY-AUTH-ALL-ROLE'
+        },
+        GET_ROLE_BY_ID: {
+            CONSUMMER_GET_ROLE_BY_ID: 'AUTH_GET-ROLE-BY-ID',
+            REFLY_GET_ROLE_BY_ID: 'REFLY-AUTH_GET-ROLE-BY-ID'
+        },
         UPDATE_ROLE: {
             CONSUMMER_UPDATE_ROLE: 'AUTH-UPDATE-ROLE',
             REFLY_UPDATE_ROLE: 'REFLY-AUTH-UPDATE-ROLE'
