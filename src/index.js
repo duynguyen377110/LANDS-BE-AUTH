@@ -12,6 +12,7 @@ amqpCore(async () => {
     
     // ROLE
     await ControllerRole.createRole();
+    await ControllerRole.updateRole();
     await ControllerRole.deleteRole();
 })
 
