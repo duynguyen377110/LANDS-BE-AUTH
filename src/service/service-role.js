@@ -64,7 +64,12 @@ class ServiceRole {
      */
     async createRole(infor = {}) {
         try {
-            return await ModelRole.create({title: infor.title});
+            let role = await ModelRole.create({title: infor.title});
+            if(!role) {
+                return { status: false, message: 'Create role unsuccess'};
+            }
+            return { status: true, message: 'Create role success'};
+
         } catch (error) {
             throw error;
         }
