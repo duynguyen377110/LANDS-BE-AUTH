@@ -29,6 +29,26 @@ class ControllerRole {
         }
     }
 
+    /**
+     * UPDATE ROLE
+     */
+    async updateRole() {
+        try {
+            const CONNECT = getCloud();
+            const UPDATEROLECONSUMER = configQueue.AUTH.UPDATE_ROLE.CONSUMMER_UPDATE_ROLE;
+            const UPDATEROLEREFLY = configQueue.AUTH.UPDATE_ROLE.REFLY_UPDATE_ROLE;
+
+            AmqpConsumer.consumer(CONNECT, UPDATEROLECONSUMER, async (information) => {
+                let { id, title } = information;
+                let payload = await ServiceRole.updateRole({id, title});
+                AmqpProducer.producer(CONNECT, UPDATEROLEREFLY, JSON.stringify(payload));
+            })
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
 
     /**
      * DELETE ROLE
