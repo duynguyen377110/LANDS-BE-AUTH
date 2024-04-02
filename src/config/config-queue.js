@@ -10,6 +10,7 @@ const configQueue = {
             CONSUMMER_SIGNOUT: 'AUTH-SIGNOUT',
             REFLY_SIGNOUT: 'REFLY-AUTH-SIGNOUT'
         },
+        // ROLE
         ROLE: {
             CONSUMMER_ROLE: 'AUTH-ROLE',
             REFLY_ROLE: 'REFLY-AUTH-ROLE'
@@ -29,6 +30,19 @@ const configQueue = {
         DELETE_ROLE: {
             CONSUMMER_DELETE_ROLE: 'AUTH-DELETE-ROLE',
             REFLY_DELETE_ROLE: 'REFLY-AUTH-DELETE-ROLE'
+        },
+        // USER
+        USER: {
+            CONSUMMER_USER: 'AUTH-USER',
+            REFLY_USER: 'REFLY-AUTH-USER'
+        },
+        UPDATE_USER: {
+            CONSUMMER_UPDATE_USER: 'AUTH-UPDATE-USER',
+            REFLY_UPDATE_USER: 'REFLY-AUTH-UPDATE-USER'
+        },
+        DELETE_USER: {
+            CONSUMMER_DELETE_USER: 'AUTH-DELETE-USER',
+            REFLY_DELETE_USER: 'REFLY-AUTH-DELETE-USER'
         }
     }
 }
