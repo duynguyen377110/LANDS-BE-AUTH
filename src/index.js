@@ -19,6 +19,8 @@ amqpCore(async () => {
     await ControllerRole.deleteRole();
 
     // USER
+    await ControllerUser.getAll();
+    await ControllerUser.getUserById();
     await ControllerUser.createUser();
     await ControllerUser.updateUser();
     await ControllerUser.deleteUser();

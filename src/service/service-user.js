@@ -13,7 +13,7 @@ class ServiceUser {
      */
     async getAll() {
         try {
-            return await ModelUser
+            let users = await ModelUser
                         .find({})
                         .populate([
                             {
@@ -21,6 +21,9 @@ class ServiceUser {
                             }
                         ])
                         .lean();
+
+            return {status: true, message: 'All user', users};
+
         } catch (error) {
             throw error;
         }
@@ -33,7 +36,7 @@ class ServiceUser {
      */
     async getUserById(id = '') {
         try {
-            return await ModelUser
+            let user = await ModelUser
                         .findById(id)
                         .populate([
                             {
@@ -41,6 +44,8 @@ class ServiceUser {
                             }
                         ])
                         .lean();
+
+            return {status: true, message: 'Get user', user};
 
         } catch (error) {
             throw error;
