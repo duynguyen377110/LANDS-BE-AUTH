@@ -10,6 +10,45 @@ class ControllerUser {
     constructor() {}
 
     /**
+     * GET ALL USER
+     */
+    async getAll() {
+        try {
+            const CONNECT = getCloud();
+            const ROLECONSUMER = configQueue.AUTH.ALL_USER.CONSUMMER_ALL_USER;
+            const ROLEREFLY = configQueue.AUTH.ALL_USER.REFLY_ALL_USER;
+
+            AmqpConsumer.consumer(CONNECT, ROLECONSUMER, async (information) => {
+                let payload = await ServiceUser.getAll();
+                AmqpProducer.producer(CONNECT, ROLEREFLY, JSON.stringify(payload));
+            })
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+     * GET USER BY ID
+     */
+    async getUserById() {
+        try {
+            const CONNECT = getCloud();
+            const CONSUMER = configQueue.AUTH.GET_USER_BY_ID.CONSUMMER_GET_USER_BY_ID;
+            const REFLY = configQueue.AUTH.GET_USER_BY_ID.REFLY_GET_USER_BY_ID;
+
+            AmqpConsumer.consumer(CONNECT, CONSUMER, async (information) => {
+                let { id } = information;
+                let payload = await ServiceUser.getUserById(id);
+                AmqpProducer.producer(CONNECT, REFLY, JSON.stringify(payload));
+            })
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
      * CREATE USER
      */
     async createUser() {
