@@ -125,7 +125,7 @@ class ServiceAccess {
                 access = await this.createUserAccess(user, publicKey, accessToken, refreshToken);
 
             } else {
-                if(access.status) return {status: false, message: 'Account existing', access: null};
+                // if(access.status) return {status: false, message: 'Account existing', access: null};
                 access.publicKey = publicKey;
                 access.accessToken = accessToken;
                 access.refreshToken = refreshToken;
