@@ -72,34 +72,6 @@ class ServiceAccess {
     }
 
     /**
-     * CLIENT SIGNUP USER ACCOUNT
-     * @param {*} infor 
-     * @returns 
-     */
-    // async userSignup(infor = {}) {
-    //     try {
-    //         let role = await ServiceRole.findRoleByName('Client');
-    //         if(role) {
-    //             let payload = {
-    //                 fullName: infor.fullName,
-    //                 email: infor.email,
-    //                 password: infor.password,
-    //                 phone: infor.phone,
-    //                 address: infor.address,
-    //                 role: role._id.toString()
-    //             }
-
-    //             let { status, message } = await ServiceUser.createUser(payload);
-    //             return { status, message };
-    //         }
-    //         return {status: false, message: 'Not found role'};
-
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
-
-    /**
      * USER SIGNIN
      * @param {*} infor 
      * @returns 
