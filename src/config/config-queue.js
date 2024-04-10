@@ -15,14 +15,6 @@ const configQueue = {
             CONSUMMER_ROLE: 'AUTH-ROLE',
             REFLY_ROLE: 'REFLY-AUTH-ROLE'
         },
-        ALL_ROLE: {
-            CONSUMMER_ALL_ROLE: 'AUTH-ALL-ROLE',
-            REFLY_ALL_ROLE: 'REFLY-AUTH-ALL-ROLE'
-        },
-        GET_ROLE_BY_ID: {
-            CONSUMMER_GET_ROLE_BY_ID: 'AUTH_GET-ROLE-BY-ID',
-            REFLY_GET_ROLE_BY_ID: 'REFLY-AUTH_GET-ROLE-BY-ID'
-        },
         UPDATE_ROLE: {
             CONSUMMER_UPDATE_ROLE: 'AUTH-UPDATE-ROLE',
             REFLY_UPDATE_ROLE: 'REFLY-AUTH-UPDATE-ROLE'
@@ -35,14 +27,6 @@ const configQueue = {
         USER: {
             CONSUMMER_USER: 'AUTH-USER',
             REFLY_USER: 'REFLY-AUTH-USER'
-        },
-        ALL_USER: {
-            CONSUMMER_ALL_USER: 'AUTH-ALL-USER',
-            REFLY_ALL_USER: 'REFLY-AUTH-ALL-USER'
-        },
-        GET_USER_BY_ID: {
-            CONSUMMER_GET_USER_BY_ID: 'AUTH_GET-USER-BY-ID',
-            REFLY_GET_USER_BY_ID: 'REFLY-AUTH_GET-USER-BY-ID'
         },
         UPDATE_USER: {
             CONSUMMER_UPDATE_USER: 'AUTH-UPDATE-USER',
