@@ -10,6 +10,10 @@ const configQueue = {
             CONSUMMER_SIGNOUT: 'AUTH-SIGNOUT',
             REFLY_SIGNOUT: 'REFLY-AUTH-SIGNOUT'
         },
+        SIGNUP: {
+            COMSUMER_SIGNUP: 'AUTH-SIGNUP',
+            REFLY_SIGNUP: 'REFLY-AUTH-SIGNUP'
+        },
         // ROLE
         ROLE: {
             CONSUMMER_ROLE: 'AUTH-ROLE',
