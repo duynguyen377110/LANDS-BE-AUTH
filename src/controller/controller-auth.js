@@ -10,6 +10,22 @@ class ControllerAuth {
     constructor() { }
 
     /**
+     * USER SIGNUP
+     */
+    async authSignup() {
+        const CONNECT = getCloud();
+            const CONSUMER = configQueue.AUTH.SIGNUP.COMSUMER_SIGNUP;
+            const REFLY = configQueue.AUTH.SIGNUP.REFLY_SIGNUP;
+
+            AmqpConsumer.consumer(CONNECT, CONSUMER, async (information) => {
+                let { fullName, email, password, phone, address } = information;
+                let infor = {fullName, email, password, phone, address}
+                let payload = await ServiceAccess.clientSignup(infor);
+                AmqpProducer.producer(CONNECT, REFLY, JSON.stringify(payload));
+            })
+    }
+
+    /**
      * USER SIGNIN
      */
     async authSignin() {

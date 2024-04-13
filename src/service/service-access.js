@@ -53,8 +53,11 @@ class ServiceAccess {
         }
     }
 
-    // async clearUserAccess() { }
-
+    /**
+     * 
+     * @param {*} user 
+     * @returns 
+     */
     async findUserAccessByUserModel(user = {}) {
         try {
             return await ModelAccess
@@ -65,6 +68,24 @@ class ServiceAccess {
                             path: 'user'
                         })
                         .exec();
+
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    /**
+     * CLIENT SIGNUP ACCOUNT
+     * @param {*} infor 
+     */
+    async clientSignup(infor = {}) {
+        try {
+            let role = await ServiceRole.findRoleByName("Client");
+            infor.role = role._id.toString();
+            let { status } = await ServiceUser.createUser(infor);
+            
+            if(!status) return { status: false, message: 'Signup unsuccess'};
+            return { status: true, message: 'Signup success'};
 
         } catch (error) {
             throw error;
