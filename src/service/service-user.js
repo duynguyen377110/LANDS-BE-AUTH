@@ -107,9 +107,9 @@ class ServiceUser {
             if(user) {
                 role.users.push(user);
                 await role.save();
-                return {status: true, message: 'Create user success'};
+                return {status: true, message: 'Create user success', user};
             }
-            return {status: false, message: 'Create user unsuccess'};
+            return {status: false, message: 'Create user unsuccess', user: null};
 
         } catch (error) {
             throw error;
