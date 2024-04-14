@@ -79,7 +79,14 @@ class ServiceUser {
      */
     async findUserByEmail(email = '') {
         try {
-            return await ModelUser.findOne({email: {$eq: email}}).exec();
+            return await ModelUser
+                        .findOne({email: {$eq: email}})
+                        .populate([
+                            {
+                                path: 'role'
+                            }
+                        ])
+                        .exec();
         } catch (error) {
             throw error;
         }
@@ -107,7 +114,7 @@ class ServiceUser {
             if(user) {
                 role.users.push(user);
                 await role.save();
-                return {status: true, message: 'Create user success', user};
+                return {status: true, message: 'Create user success', user, role: role.slug};
             }
             return {status: false, message: 'Create user unsuccess', user: null};
 
