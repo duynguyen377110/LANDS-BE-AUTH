@@ -19,8 +19,8 @@ class ControllerRole {
             const ROLEREFLY = configQueue.AUTH.ROLE.REFLY_ROLE;
 
             AmqpConsumer.consumer(CONNECT, ROLECONSUMER, async (information) => {
-                let { title } = information;
-                let payload = await ServiceRole.createRole({title});
+                let { title, slug } = information;
+                let payload = await ServiceRole.createRole({title, slug});
                 AmqpProducer.producer(CONNECT, ROLEREFLY, JSON.stringify(payload));
             })
 
@@ -39,8 +39,8 @@ class ControllerRole {
             const UPDATEROLEREFLY = configQueue.AUTH.UPDATE_ROLE.REFLY_UPDATE_ROLE;
 
             AmqpConsumer.consumer(CONNECT, UPDATEROLECONSUMER, async (information) => {
-                let { id, title } = information;
-                let payload = await ServiceRole.updateRole({id, title});
+                let { id, title, slug } = information;
+                let payload = await ServiceRole.updateRole({id, title, slug});
                 AmqpProducer.producer(CONNECT, UPDATEROLEREFLY, JSON.stringify(payload));
             })
 

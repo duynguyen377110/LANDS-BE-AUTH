@@ -5,8 +5,18 @@ const ServiceUser = require("../service/service-user");
 const UtilBcrypt = require("../utils/util-bcrypt");
 const UtilCrypto = require("../utils/util-crypto");
 const UtilJwt = require("../utils/util-jwt");
+const UtilLoadsh = require("../utils/util-lodash");
 
 class ServiceAccess {
+    keys = [
+        'user._id',
+        'user.fullName',
+        'user.email',
+        'user.phone',
+        'user.address',
+        "accessToken",
+        "refreshToken"
+    ];
 
     constructor() { }
 
@@ -83,7 +93,7 @@ class ServiceAccess {
             let role = await ServiceRole.findRoleByName("Client");
             infor.role = role._id.toString();
 
-            let { status, user } = await ServiceUser.createUser(infor);
+            let { status, user, role: role_key } = await ServiceUser.createUser(infor);
 
             if(!status && !user) {
                 return { status: false, message: 'Signup unsuccess'};
@@ -96,8 +106,11 @@ class ServiceAccess {
                 if(!access) { 
                     return { status: false, message: 'Signup unsuccess', access: null};
                 }
+
+                let access_cv = UtilLoadsh.pick(access, this.keys);
+                access_cv['slug'] = user.role.slug;
                 
-                return { status: true, message: 'Signup success', access};
+                return { status: true, message: 'Signup success', access: access_cv};
             }
 
         } catch (error) {
@@ -139,10 +152,13 @@ class ServiceAccess {
                 await access.save();
             }
 
+            let access_cv = UtilLoadsh.pick(access, this.keys);
+            access_cv.slug = user.role.slug;
+
             return {
                 status: true,
                 message: 'signin success',
-                access
+                access: access_cv,
             }
 
         } catch (error) {

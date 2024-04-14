@@ -64,7 +64,10 @@ class ServiceRole {
      */
     async createRole(infor = {}) {
         try {
-            let role = await ModelRole.create({title: infor.title});
+            let role = await ModelRole.create({
+                title: infor.title,
+                slug: infor.slug
+            });
             if(!role) {
                 return { status: false, message: 'Create role unsuccess'};
             }
@@ -88,6 +91,7 @@ class ServiceRole {
                 return {status: false, message: 'Update role unsuccess'};
             }
             role.title = infor.title;
+            role.slug = infor.slug;
             await role.save();
             return {status: true, message: 'Update role success'};
 
