@@ -1,4 +1,5 @@
 "use strict"
+const stringify = require('json-stringify-safe');
 const getCloud = require("../amqp/amqp-core").getCloud;
 const AmqpConsumer = require("../amqp/amqp-consumer");
 const AmqpProducer = require("../amqp/amqp-reducer");
@@ -17,11 +18,11 @@ class ControllerAuth {
             const CONSUMER = configQueue.AUTH.SIGNUP.COMSUMER_SIGNUP;
             const REFLY = configQueue.AUTH.SIGNUP.REFLY_SIGNUP;
 
-            AmqpConsumer.consumer(CONNECT, CONSUMER, async (information) => {
+            await AmqpConsumer.consumer(CONNECT, CONSUMER, async (information) => {
                 let { fullName, email, password, phone, address } = information;
                 let infor = {fullName, email, password, phone, address}
                 let payload = await ServiceAccess.clientSignup(infor);
-                AmqpProducer.producer(CONNECT, REFLY, JSON.stringify(payload));
+                await AmqpProducer.producer(CONNECT, REFLY, stringify(payload));
             })
     }
 
@@ -34,10 +35,10 @@ class ControllerAuth {
             const AUTHCONSUMER = configQueue.AUTH.SIGNIN.CONSUMMER_SIGNIN;
             const AUTHREFLY = configQueue.AUTH.SIGNIN.REFLY_SIGNIN;
 
-            AmqpConsumer.consumer(CONNECT, AUTHCONSUMER, async (information) => {
+            await AmqpConsumer.consumer(CONNECT, AUTHCONSUMER, async (information) => {
                 let { email, password } = information;
                 let payload = await ServiceAccess.userSignin({email, password});
-                AmqpProducer.producer(CONNECT, AUTHREFLY, JSON.stringify(payload));
+                await AmqpProducer.producer(CONNECT, AUTHREFLY, stringify(payload));
             })
 
         } catch (error) {
@@ -54,10 +55,10 @@ class ControllerAuth {
             const AUTHCONSUMER = configQueue.AUTH.SIGNOUT.CONSUMMER_SIGNOUT;
             const AUTHREFLY = configQueue.AUTH.SIGNOUT.REFLY_SIGNOUT;
 
-            AmqpConsumer.consumer(CONNECT, AUTHCONSUMER, async (information) => {
+            await AmqpConsumer.consumer(CONNECT, AUTHCONSUMER, async (information) => {
                 let { email } = information;
                 let payload = await ServiceAccess.userSignout({email});
-                AmqpProducer.producer(CONNECT, AUTHREFLY, JSON.stringify(payload));
+                await AmqpProducer.producer(CONNECT, AUTHREFLY, JSON.stringify(payload));
             })
 
         } catch (error) {

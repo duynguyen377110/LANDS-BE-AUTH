@@ -82,13 +82,26 @@ class ServiceAccess {
         try {
             let role = await ServiceRole.findRoleByName("Client");
             infor.role = role._id.toString();
-            let { status } = await ServiceUser.createUser(infor);
-            
-            if(!status) return { status: false, message: 'Signup unsuccess'};
-            return { status: true, message: 'Signup success'};
+
+            let { status, user } = await ServiceUser.createUser(infor);
+
+            if(!status && !user) {
+                return { status: false, message: 'Signup unsuccess'};
+
+            } else {
+                let {publicKey, accessToken, refreshToken } = this.generalAccessToken(user);
+                let access = await this.createUserAccess(user, publicKey, accessToken, refreshToken);
+
+                
+                if(!access) { 
+                    return { status: false, message: 'Signup unsuccess', access: null};
+                }
+                
+                return { status: true, message: 'Signup success', access};
+            }
 
         } catch (error) {
-            throw error;
+            return { status: false, message: 'Signup unsuccess', error};
         }
     }
 
